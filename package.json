@@ -1,5 +1,5 @@
 {
-  "name": "vue-ssr4",
+  "name": "vue-ssr",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -24,6 +24,8 @@
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.17",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "vuex": "^3.0.1",
+    "vuex-router-sync": "^5.0.0"
   }
 }

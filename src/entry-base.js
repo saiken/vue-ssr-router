@@ -1,16 +1,22 @@
-import Vue from 'vue';
-import App from './App.vue';
-import { createRouter } from './router';
+import Vue from 'vue'
+import App from './App.vue'
+import { createRouter } from './router'
+import { createStore } from './store'
+import { sync } from 'vuex-router-sync'
 
 const createApp = () => {
-  const router = createRouter();
+    const router = createRouter()
+    const store = createStore()
 
-  const app = new Vue({
-    router,
-    render: h => h(App)
-  });
+    sync(store, router)
 
-  return { app, router };
-};
+    const app = new Vue({
+        router,
+        store,
+        render: h => h(App)
+    })
 
-export { createApp };
+    return { app, router, store }
+}
+
+export { createApp }

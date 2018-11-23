@@ -1,8 +1,11 @@
 # vue-ssr
-for studying vue.js &amp; ssr. not using vue-router &amp; vuex.
+for studying vue.js &amp; ssr.
 
-※"src/components/CallApiOnCreated.vue" calls api on created,
+- "CallApiOnCreated.vue" calls api on created,  
 but it is executed both from the server and from the client
+- "StoreSample.vue" is vuex's sample.
+- "HydrationMiss.vue" has an error caused by hydration.
+
 
 1.npm install
 ```

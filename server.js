@@ -9,26 +9,33 @@ app.use('/', express.static('public'));
 app.use('/dist', express.static('dist'));
 
 const template = fs.readFileSync(path.join(__dirname, 'src/index.template.html'), 'utf-8');
-const renderer = VueServerRenderer.createBundleRenderer(path.join(__dirname, 'dist/vue-ssr-server-bundle.json'), { template });
+const renderer = VueServerRenderer.createBundleRenderer(path.join(__dirname, 'dist/vue-ssr-server-bundle.json'), {template});
 
 app.get('/api/sleep5', (req, res) => {
-  console.log(req.url);
-  setTimeout(() => {
-    console.log('sleeped');
-    res.end('success');
-  }, 5000);
+    console.log(req.url);
+    setTimeout(() => {
+        console.log('sleeped');
+        res.end('{title:"hoge title"}');
+    }, 3000);
+});
+
+app.get('/api/weather', (req, res) => {
+    setTimeout(() => {
+        console.log(req.url);
+        res.json({title:"tokyo", description:"Sunny!!"});
+    }, 2000);
 });
 
 app.get('*', (req, res) => {
-  console.log(req.url);
-  const ctx = { url: req.url };
-  renderer.renderToString(ctx, (err, html) => {
-    if (err) { 
-      console.log(err);
-      return res.status(500).end('Interval Server Error');
-    }
-    res.end(html);
-  });
+    console.log(req.url);
+    const context = {url: req.url};
+    renderer.renderToString(context, (err, html) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).end('Interval Server Error');
+        }
+        res.end(html);
+    });
 });
 
 app.listen(8080);

@@ -1,12 +1,31 @@
 import { createApp } from './entry-base';
 
-export default ctx => {
+export default context => {
   return new Promise((resolve, reject) => {
-    const { app, router } = createApp();
-    router.push(ctx.url);
+    const { app, router, store } = createApp();
+    router.push(context.url);
+      router.onReady(() => {
+          const matchedComponents = router.getMatchedComponents()
+          if (!matchedComponents.length) {
+              reject({ code: 404 })
+          }
 
-    const matchedComponents = router.getMatchedComponents();
-    if (!matchedComponents) return reject({ code: 404 });
-    resolve(app);
+          // 一致したルートコンポーネントすべての asyncData() を呼び出します
+          Promise.all(matchedComponents.map(Component => {
+              if (Component.asyncData) {
+                  return Component.asyncData({
+                      store,
+                      route: router.currentRoute
+                  })
+              }
+          })).then(() => {
+              // すべてのプリフェッチのフックが解決されると、ストアには、
+              // アプリケーションを描画するために必要とされる状態が入っています。
+              // 状態を context に付随させ、`template` オプションがレンダラに利用されると、
+              // 状態は自動的にシリアライズされ、HTML 内に `window.__INITIAL_STATE__` として埋め込まれます
+              context.state = store.state
+              resolve(app)
+          }).catch(reject)
+      }, reject)
   });
 }

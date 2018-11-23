@@ -5,8 +5,9 @@
       <h2>Navigation</h2>
       <ul>
         <li><router-link to="/">Top</router-link></li>
-        <li><router-link to="/page">Page</router-link></li>
+        <li><router-link to="/hydrationMiss">HydrationMiss</router-link></li>
         <li><router-link to="/callApiOnCreated">callApiOnCreated</router-link></li>
+        <li><router-link to="/storeSample">storeSample</router-link></li>
       </ul>
     </nav>
     <section>
