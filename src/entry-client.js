@@ -21,8 +21,22 @@ router.onReady(() => {
         }
 
         Promise.all(activated.map(c => {
-            if (c.asyncData) {
-                return c.asyncData({ store, route: to })
+            console.log(c)
+            try {
+                if (c.asyncData) {
+                    return c.asyncData({store, route: to})
+                }
+            } catch(err){
+                // asyncDataでthrow しても、後続のcatch に入らなかったのでcatch
+                if (err.url) {
+                    console.log(err.url)
+                    if ( /^http:\/\/|^https:\/\//.test(err.url)){
+                        window.location.href = err.url
+                        return
+                    }
+                    next({path:err.url})
+                    return
+                }
             }
         })).then(() => {
             next()

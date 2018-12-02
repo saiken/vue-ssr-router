@@ -31,6 +31,9 @@ app.get('*', (req, res) => {
     const context = {url: req.url};
     renderer.renderToString(context, (err, html) => {
         if (err) {
+            if (err.url) {
+                res.redirect(err.url)
+            }
             console.log(err);
             return res.status(500).end('Interval Server Error');
         }

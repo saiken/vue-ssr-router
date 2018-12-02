@@ -8,6 +8,7 @@
         <li><router-link to="/hydrationMiss">HydrationMiss</router-link></li>
         <li><router-link to="/callApiOnCreated">callApiOnCreated</router-link></li>
         <li><router-link to="/storeSample">storeSample</router-link></li>
+        <li><router-link to="/redirectSample">redirectSample</router-link></li>
       </ul>
     </nav>
     <section>
