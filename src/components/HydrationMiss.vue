@@ -1,7 +1,7 @@
 <template>
-    <table>
-        <tr>
-            <td>hi</td>
-        </tr>
-    </table>
+  <table>
+    <tr>
+      <td>hi</td>
+    </tr>
+  </table>
 </template>

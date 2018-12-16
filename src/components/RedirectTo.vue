@@ -1,5 +1,5 @@
 <template>
-    <p>RedirectTo</p>
+  <p>RedirectTo</p>
 </template>
 <script>
 </script>
